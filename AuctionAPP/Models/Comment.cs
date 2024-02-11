@@ -4,10 +4,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AuctionAPP.Models
 {
-    public class Bid
+    public class Comment
     {
-        public int Id { get; set; } 
-        public double Price { get; set; }
+
+        public int Id { get; set; }
+        public string Content { get; set; }
 
         [Required]
         public string? IdentityUserId { get; set; }
@@ -20,8 +21,6 @@ namespace AuctionAPP.Models
 
 
         [ForeignKey("ListingId")]
-        public  Listing? Listing { get; set; }
-
-
+        public Listing? Listing { get; set; }
     }
 }
