@@ -4,8 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AuctionAPP.Models
 {
-    public class Listing
+    public class ListingVM
     {
+
 
         public int Id { get; set; }
 
@@ -13,8 +14,8 @@ namespace AuctionAPP.Models
 
         public string Description { get; set; }
 
-        public int price { get; set; }  
-        public string ImagePath { get;set; }
+        public int price { get; set; }
+        public IFormFile Image { get; set; }
 
         public bool IsSold { get; set; }=false;
 
@@ -22,11 +23,8 @@ namespace AuctionAPP.Models
         public string IdentityUserId { get; set; }
 
         [ForeignKey("IdentityUserId")]
-       
+
         public IdentityUser? User { get; set; }
 
-        public List<Bid>? Bids { get; set; }
-
-        public List<Comment> Comments { get; set; }
     }
 }

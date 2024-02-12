@@ -13,14 +13,13 @@
 
            <div class=" row">
                <div class="col col-xs-6 col-lg-5">
-               <img src="~/Images/@listing.ImagePath" style="max-width:400px; max-height:400 px;"/>
+               <img src="~/Images/@listing.ImagePath" style="max-width:200px; max-height:200 px;"/>
             </div>
             <div class="col col-xs-6 col-lg-7">
                 <h5><a asp-action="Details" asp-route-id="@listing.Id" style="color:black;"></a>@listing.Title</h5>
                 <div> @listing.Description</div>
                 <div>Bid: @listing.price.ToString("N2")</div>
                 <div> Listed by: @listing.User.Email</div>
-
             </div>
            
            </div>
