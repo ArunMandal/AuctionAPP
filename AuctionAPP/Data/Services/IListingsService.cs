@@ -9,5 +9,7 @@ namespace AuctionAPP.Data.Services
         Task Add(Listing listing);
 
         Task<Listing> GetById(int? id);
+
+        Task Update(Listing listing);
     }
 }

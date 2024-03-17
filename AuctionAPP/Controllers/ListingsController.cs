@@ -25,10 +25,20 @@ namespace AuctionAPP.Controllers
         }
 
         // GET: Listings
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pageNumber,string searchString)
         {
             var itemList =  _listingsService.GetAll();
-            return View(await itemList.ToListAsync());
+            int pageSize = 1;
+            // return View(await itemList.ToListAsync());
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                itemList = itemList.Where(a => a.Title.Contains(searchString));
+                return View(await PaginatedList<Listing>.CreateAsync(itemList.Where(a => a.IsSold == false).AsNoTracking(), pageNumber ?? 1, pageSize));
+
+            }
+
+            
+            return View(await PaginatedList<Listing>.CreateAsync(itemList.Where(a=>a.IsSold==false).AsNoTracking(),pageNumber ?? 1, pageSize));
         }
 
         // GET: Listings/Details/5
@@ -90,16 +100,7 @@ namespace AuctionAPP.Controllers
 
             return View("Index");
 
-          
-
-            //if (ModelState.IsValid)
-            //{
-            //    _context.Add(listing);
-            //    await _context.SaveChangesAsync();
-            //    return RedirectToAction(nameof(Index));
-            //}
-            //ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", listing.IdentityUserId);
-            //return View(listing);
+  
         }
 
         // GET: Listings/Edit/5
@@ -135,8 +136,10 @@ namespace AuctionAPP.Controllers
             {
                 try
                 {
-                    _context.Update(listing);
-                    await _context.SaveChangesAsync();
+
+                   await _listingsService.Update(listing);
+                    //_context.Update(listing);
+                    //await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
