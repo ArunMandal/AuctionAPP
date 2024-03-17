@@ -11,5 +11,7 @@ namespace AuctionAPP.Data.Services
         Task<Listing> GetById(int? id);
 
         Task Update(Listing listing);
+
+        Task SaveChanges();
     }
 }

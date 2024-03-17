@@ -48,5 +48,10 @@ namespace AuctionAPP.Data.Services
             await _context.SaveChangesAsync();
             
         }
+
+        public async Task SaveChanges()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }
